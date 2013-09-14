@@ -130,8 +130,8 @@ class Simple2D:
 
     def clear(self):
         """Sets all cells of the array to false."""
-        self.content = [[False for _ in range(self.size[0])]
-                        for _ in range(self.size[1])]
+        self.content = [[False for _ in range(self.size[1])]
+                        for _ in range(self.size[0])]
 
     def getstring(self, floor = ".", wall = "#"):
         """Returns a string representation of the 2D array."""
