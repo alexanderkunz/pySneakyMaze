@@ -20,13 +20,15 @@ class EvenException(Exception):
     EvenException is raised when a position or size is even when
     it shouldn't be.
     """
-    pass
-
 
 class Simple2D:
-    """A 2D-Depth-First algorithm implementation"""
+    """
+    A 2D-Depth-First algorithm implementation. Currently the algorithm is
+    heavily using recursion. With the default python recursion limit it
+    shouldn't go much over 100x100 or else it could fail.
+    """
 
-    def __init__(self, size, seed=None, start=None):
+    def __init__(self, size, seed = None, start=(1, 1)):
 
         #Size Checks
         if size[0] % 2 != 1 or size[1] % 2 != 1:
@@ -70,47 +72,40 @@ class Simple2D:
             neighbours.append(cell)
         return neighbours
 
-    def _getvalidneighbours(self, pos, visited):
+    def _getvalidneighbours(self, pos, invalid):
         """Returns all valid neighbours of a position."""
         mylist = []
         neighbours = self._getneighbours(pos)
         for neighbour in neighbours:
-            if not neighbour in visited:
+            if not neighbour in invalid:
                 mylist.append(neighbour)
         return mylist
 
-    def _computecell(self, lastcellpos, cell, active, visited, rand):
+    def _computecell(self, lastcell, cell, visited, rand):
         """Main part of the generation algorithm."""
 
-        #Save Current Cell
-        curcell = active[cell]
-        visited.append(curcell)
-        active.pop(cell)
-
         #Update Array
-        self.content[curcell[0]][curcell[1]] = True
-        self.content[int(math.ceil((curcell[0] + lastcellpos[0]) / 2.0))] \
-                    [int(math.ceil((curcell[1] + lastcellpos[1]) / 2.0))] = True
+        self.content[cell[0]][cell[1]] = True
+        self.content[int(math.ceil((cell[0] + lastcell[0]) / 2.0))] \
+                    [int(math.ceil((cell[1] + lastcell[1]) / 2.0))] = True
 
         #Get new Neighbours
-        new = self._getvalidneighbours(curcell, visited)
-        if len(new) <= 0:
-            return active, visited, rand
+        neighbours = self._getvalidneighbours(cell, visited)
+        if len(neighbours) <= 0:
+            return visited, rand
 
-        for i in new:
-            active.append(i)
+        #Append Neighbours to Visited
+        visited += neighbours
 
         #Recursively compute each Neighbour
-        randlist = range(0, len(new))
-        rand.shuffle(randlist)
-        for randint in randlist:
-            active, visited, rand = self._computecell(curcell,
-                                                      len(active) - randint - 1,
-                                                      active,
-                                                      visited,
-                                                      rand)
+        rand.shuffle(neighbours)
+        for neighbour in neighbours:
+            visited, rand = self._computecell(cell,
+                                              neighbour,
+                                              visited,
+                                              rand)
 
-        return active, visited, rand
+        return visited, rand
 
     def regenerate(self, seed=None, start=None):
         """
@@ -122,18 +117,15 @@ class Simple2D:
         self.clear()
 
         #Check Start
-        if start == None:
-            start = self.start
+        if start != None:
+            self.start = start
 
         #Variables
         rand = random.Random(seed)
-        active = [start]
-        visited = [start]
-        curcellindex = len(active) - 1
-        curcell = active[curcellindex]
+        visited = [self.start]
 
-        active, visited, rand = self._computecell(curcell, curcellindex,
-                                                  active, visited, rand)
+        visited, rand = self._computecell(self.start, self.start,
+                                          visited, rand)
 
         return True
 
@@ -159,9 +151,9 @@ if __name__ == "__main__":
     print("But to not disappoint you, I'll show you a few fancy examples.")
 
     T1 = time.time()
-    MAZE1 = Simple2D((23, 23), None, (1, 1))
+    MAZE1 = Simple2D((79, 79), None, (1, 1))
     T2 = time.time()
-    print("Time to generate Simple2D (23x23): {} seconds.".format(
+    print("Time to generate Simple2D (79x79): {} seconds.".format(
           str(round(T2 - T1, 5))
           ))
 
