@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 """
-
-SneakyMaze 1.0
-
-Copyright 2013 Alexander Kunz
-Released under the MIT License.
-
 SneakyMaze is a library providing tools for creating infinite/finite
 2D and 3D mazes.
-
 """
+
+__author__ = "Alexander Kunz"
+__email__ = "alexanderkunz@hotmail.de"
+__license__ = "MIT"
+__version__ = "1.0"
 
 import random
 import math
