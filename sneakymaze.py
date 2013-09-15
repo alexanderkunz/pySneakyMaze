@@ -89,40 +89,35 @@ class Simple2D:
             neighbours.append(cell)
         return neighbours
 
-    def _getvalidneighbours(self, pos, invalid):
+    def _getvalidneighbours(self, pos):
         """Returns all valid neighbours of a position."""
         mylist = []
         neighbours = self._getneighbours(pos)
         for neighbour in neighbours:
-            if not neighbour in invalid:
+            if not self.content[neighbour[0]][neighbour[1]]:
                 mylist.append(neighbour)
         return mylist
 
-    def _computecell(self, lastcell, cell, visited, rand):
+    def _computecell(self, lastcell, cell, rand):
         """Main part of the generation algorithm."""
 
         #Update Array
-        self.content[cell[0]][cell[1]] = True
-        self.content[int(math.ceil((cell[0] + lastcell[0]) / 2.0))] \
-                    [int(math.ceil((cell[1] + lastcell[1]) / 2.0))] = True
+        self.content[(cell[0] + lastcell[0]) / 2] \
+                    [(cell[1] + lastcell[1]) / 2] = True
 
         #Get new Neighbours
-        neighbours = self._getvalidneighbours(cell, visited)
+        neighbours = self._getvalidneighbours(cell)
         if len(neighbours) <= 0:
-            return visited, rand
+            return
 
-        #Append Neighbours to Visited
-        visited += neighbours
+        #Add Neighbour to Content
+        for neighbour in neighbours:
+            self.content[neighbour[0]][neighbour[1]] = True
 
         #Recursively compute each Neighbour
         rand.shuffle(neighbours)
         for neighbour in neighbours:
-            visited, rand = self._computecell(cell,
-                                              neighbour,
-                                              visited,
-                                              rand)
-
-        return visited, rand
+            self._computecell(cell, neighbour, rand)
 
     def regenerate(self, seed=None, start=None):
         """
@@ -139,10 +134,9 @@ class Simple2D:
 
         #Variables
         rand = random.Random(seed)
-        visited = [self.start]
 
-        visited, rand = self._computecell(self.start, self.start,
-                                          visited, rand)
+        self.content[self.start[0]][self.start[1]] = True
+        self._computecell(self.start, self.start, rand)
 
         return True
 
@@ -177,7 +171,7 @@ def main():
 
     import time
 
-    b_samples = 100
+    b_samples = 10000
 
     #Simple2D
     brange = range(b_samples)
@@ -189,9 +183,9 @@ def main():
 
     #Results
     print("""
-Benchmarking Results:
+Average Benchmarking Results ({s} samples):
 Simple2D (79x9): {s2d} seconds
-""".format(s2d=round(b_s2d_t, 5)))
+""".format(s= b_samples, s2d=round(b_s2d_t, 6)))
 
 if __name__ == "__main__":
     main()
