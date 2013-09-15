@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-SneakyMaze is a library providing tools for creating infinite/finite
+pySneakyMaze is a library providing tools for creating infinite/finite
 2D and 3D mazes.
 """
 
@@ -20,6 +20,12 @@ class EvenException(Exception):
     it shouldn't be.
     """
 
+class InvalidSizeException(Exception):
+    """
+    InvalidSizeException is raised when the size is invalid.
+    Invalid can mean as Example too small or not a list, tuple or integer.
+    """
+
 class Simple2D:
     """
     A 2D-Depth-First algorithm implementation. Currently the algorithm is
@@ -29,9 +35,21 @@ class Simple2D:
 
     def __init__(self, size, seed = None, start=(1, 1)):
 
+        #Convert Size to Tuple if needed
+        if not type(size) in (type(()), type([])):
+            if type(size) == type(0):
+                size = (size, size)
+            else:
+                raise InvalidSizeException
+
+        #Make sure that the Size is an integer
+        size = (int(math.floor(size[0])), int(math.floor(size[1])))
+
         #Size Checks
         if size[0] % 2 != 1 or size[1] % 2 != 1:
             raise EvenException
+        if size[0] < 3 or size[1] < 3:
+            raise InvalidSizeException
         self.size = size
 
         #Start Checks
@@ -142,18 +160,38 @@ class Simple2D:
             mystr += "\n"
         return mystr
 
-if __name__ == "__main__":
+def main():
+    """Outputs a few examples and benchmarks."""
+
+    print("pySneakyMaze {}\n".format(__version__))
+
+    #Visual
+    #######
+
+    #Simple2D
+    print("Simple2D (79x9)")
+    print(Simple2D((79, 9)))
+
+    #Benchmarking
+    #############
 
     import time
 
-    print("You should import the library instead of running it!")
-    print("But to not disappoint you, I'll show you a few fancy examples.")
+    b_samples = 100
 
-    T1 = time.time()
-    MAZE1 = Simple2D((79, 79), None, (1, 1))
-    T2 = time.time()
-    print("Time to generate Simple2D (79x79): {} seconds.".format(
-          str(round(T2 - T1, 5))
-          ))
+    #Simple2D
+    brange = range(b_samples)
+    time1 = time.time()
+    for _ in brange:
+        Simple2D((79, 9))
+    time2 = time.time()
+    b_s2d_t = (time2 - time1) / b_samples
 
-    print(MAZE1)
+    #Results
+    print("""
+Benchmarking Results:
+Simple2D (79x9): {s2d} seconds
+""".format(s2d=round(b_s2d_t, 5)))
+
+if __name__ == "__main__":
+    main()
