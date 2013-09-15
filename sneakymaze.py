@@ -171,7 +171,7 @@ def main():
 
     import time
 
-    b_samples = 10000
+    b_samples = 100
 
     #Simple2D
     brange = range(b_samples)
