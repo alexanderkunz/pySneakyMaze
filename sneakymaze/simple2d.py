@@ -1,32 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""
-pySneakyMaze is a library providing tools for creating infinite/finite
-2D and 3D mazes.
-"""
-
-__author__ = "Alexander Kunz"
-__email__ = "alexanderkunz@hotmail.de"
-__license__ = "MIT"
-__version__ = "1.0"
-
-import random
 import math
+import random
 
-class EvenException(Exception):
-    """
-    EvenException is raised when a position or size is even when
-    it shouldn't be.
-    """
+from prototypes import Maze2DPrototype
+from exceptions import InvalidSizeException, EvenException
 
-class InvalidSizeException(Exception):
-    """
-    InvalidSizeException is raised when the size is invalid.
-    Invalid can mean as Example too small or not a list, tuple or integer.
-    """
-
-class Simple2D:
+class Simple2D(Maze2DPrototype):
     """
     A 2D-Depth-First algorithm implementation. Currently the algorithm is
     heavily using recursion. With the default python recursion limit it
@@ -62,15 +40,6 @@ class Simple2D:
 
         #Start Generator
         self.regenerate(seed)
-
-    def __repr__(self):
-        return self.getstring()
-
-    def _isinside(self, pos):
-        """Checks if a position is inside the array."""
-        xinside = pos[0] > 0 and pos[0] < self.size[0]
-        yinside = pos[1] > 0 and pos[1] < self.size[1]
-        return xinside and yinside
 
     def _getneighbours(self, pos):
         """Returns all neighbours of a position."""
@@ -139,53 +108,3 @@ class Simple2D:
         self._computecell(self.start, self.start, rand)
 
         return True
-
-    def clear(self):
-        """Sets all cells of the array to false."""
-        self.content = [[False for _ in range(self.size[1])]
-                        for _ in range(self.size[0])]
-
-    def getstring(self, floor = ".", wall = "#"):
-        """Returns a string representation of the 2D array."""
-        mystr = ""
-        for ycoord in range(0, self.size[1]):
-            for xcoord in range(0, self.size[0]):
-                mystr += floor if self.content[xcoord][ycoord] else wall
-            mystr += "\n"
-        return mystr
-
-def main():
-    """Outputs a few examples and benchmarks."""
-
-    print("pySneakyMaze {}\n".format(__version__))
-
-    #Visual
-    #######
-
-    #Simple2D
-    print("Simple2D (79x9)")
-    print(Simple2D((79, 9)))
-
-    #Benchmarking
-    #############
-
-    import time
-
-    b_samples = 100
-
-    #Simple2D
-    brange = range(b_samples)
-    time1 = time.time()
-    for _ in brange:
-        Simple2D((79, 9))
-    time2 = time.time()
-    b_s2d_t = (time2 - time1) / b_samples
-
-    #Results
-    print("""
-Average Benchmarking Results ({s} samples):
-Simple2D (79x9): {s2d} seconds
-""".format(s= b_samples, s2d=round(b_s2d_t, 6)))
-
-if __name__ == "__main__":
-    main()
