@@ -52,20 +52,18 @@ class Maze2DPrototype(object):
 
     def _getneighbours(self, pos):
         """Returns all neighbours of a position."""
-        neighbours = []
         cell = (pos[0], pos[1] + 2)
         if self._isinside(cell):
-            neighbours.append(cell)
+            yield cell
         cell = (pos[0], pos[1] - 2)
         if self._isinside(cell):
-            neighbours.append(cell)
+            yield cell
         cell = (pos[0] + 2, pos[1])
         if self._isinside(cell):
-            neighbours.append(cell)
+            yield cell
         cell = (pos[0] - 2, pos[1])
         if self._isinside(cell):
-            neighbours.append(cell)
-        return neighbours
+            yield cell
 
     def _getwallneighbours(self, pos):
         """Returns only the neighbours which are a wall (have value 'False')."""
