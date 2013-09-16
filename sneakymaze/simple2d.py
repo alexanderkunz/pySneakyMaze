@@ -1,17 +1,24 @@
+"""
+Simple2D - Depth-First-Algorithm
+"""
+
 import math
 import random
 
-from prototypes import Maze2DPrototype
-from exceptions import InvalidSizeException, EvenException
+from sneakymaze.prototypes import Maze2DPrototype
+from sneakymaze.exceptions import InvalidSizeException, EvenException
 
 class Simple2D(Maze2DPrototype):
     """
-    A 2D-Depth-First algorithm implementation. Currently the algorithm is
+    A 2D-Depth-First-Algorithm implementation. Currently the algorithm is
     heavily using recursion. With the default python recursion limit it
     shouldn't go much over 100x100 or else it could fail.
     """
 
     def __init__(self, size, seed = None, start=(1, 1)):
+
+        #Init Base Class
+        super(Simple2D, self).__init__()
 
         #Convert Size to Tuple if needed
         if not type(size) in (type(()), type([])):
@@ -40,23 +47,6 @@ class Simple2D(Maze2DPrototype):
 
         #Start Generator
         self.regenerate(seed)
-
-    def _getneighbours(self, pos):
-        """Returns all neighbours of a position."""
-        neighbours = []
-        cell = (pos[0], pos[1] + 2)
-        if self._isinside(cell):
-            neighbours.append(cell)
-        cell = (pos[0], pos[1] - 2)
-        if self._isinside(cell):
-            neighbours.append(cell)
-        cell = (pos[0] + 2, pos[1])
-        if self._isinside(cell):
-            neighbours.append(cell)
-        cell = (pos[0] - 2, pos[1])
-        if self._isinside(cell):
-            neighbours.append(cell)
-        return neighbours
 
     def _getvalidneighbours(self, pos):
         """Returns all valid neighbours of a position."""

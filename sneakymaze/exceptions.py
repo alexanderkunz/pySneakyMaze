@@ -1,3 +1,7 @@
+"""
+This file contains varius exceptions used in a few classes.
+"""
+
 class EvenException(Exception):
     """
     EvenException is raised when a position or size is even when
