@@ -3,16 +3,43 @@ This file contains the prototypes needed for the implementations
 of the algorithms.
 """
 
+import math
+from sneakymaze.exceptions import InvalidSizeException, EvenException
+
 class Maze2DPrototype(object):
     """
     Prototype for 2D mazes with standard functions.
     """
 
-    size = None
-    content = None
+    def __init__(self, size, seed = None, start=(1, 1)):
 
-    def __init__(self):
-        pass
+        #Convert Size to Tuple if needed
+        if not type(size) in (type(()), type([])):
+            if type(size) == type(0):
+                size = (size, size)
+            else:
+                raise InvalidSizeException
+
+        #Make sure that the Size is an integer
+        size = (int(math.floor(size[0])), int(math.floor(size[1])))
+
+        #Size Checks
+        if size[0] % 2 != 1 or size[1] % 2 != 1:
+            raise EvenException
+        if size[0] < 3 or size[1] < 3:
+            raise InvalidSizeException
+        self.size = size
+
+        #Start Checks
+        if start[0] % 2 != 1 or start[1] % 2 != 1:
+            raise EvenException
+        self.start = start
+
+        #Clear Content
+        self.content = None
+
+        #Start Generator
+        self.regenerate(seed)
 
     def __repr__(self):
         return self.getstring()
@@ -53,3 +80,7 @@ class Maze2DPrototype(object):
                 mystr += floor if self.content[xcoord][ycoord] else wall
             mystr += "\n"
         return mystr
+
+    def regenerate(self, seed=None, start=None):
+        """Override! Should create a new maze."""
+        pass

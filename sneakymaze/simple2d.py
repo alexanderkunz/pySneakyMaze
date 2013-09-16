@@ -2,11 +2,9 @@
 Simple2D - Depth-First-Algorithm
 """
 
-import math
 import random
 
 from sneakymaze.prototypes import Maze2DPrototype
-from sneakymaze.exceptions import InvalidSizeException, EvenException
 
 class Simple2D(Maze2DPrototype):
     """
@@ -14,39 +12,6 @@ class Simple2D(Maze2DPrototype):
     heavily using recursion. With the default python recursion limit it
     shouldn't go much over 100x100 or else it could fail.
     """
-
-    def __init__(self, size, seed = None, start=(1, 1)):
-
-        #Init Base Class
-        super(Simple2D, self).__init__()
-
-        #Convert Size to Tuple if needed
-        if not type(size) in (type(()), type([])):
-            if type(size) == type(0):
-                size = (size, size)
-            else:
-                raise InvalidSizeException
-
-        #Make sure that the Size is an integer
-        size = (int(math.floor(size[0])), int(math.floor(size[1])))
-
-        #Size Checks
-        if size[0] % 2 != 1 or size[1] % 2 != 1:
-            raise EvenException
-        if size[0] < 3 or size[1] < 3:
-            raise InvalidSizeException
-        self.size = size
-
-        #Start Checks
-        if start[0] % 2 != 1 or start[1] % 2 != 1:
-            raise EvenException
-        self.start = start
-
-        #Clear Content
-        self.content = None
-
-        #Start Generator
-        self.regenerate(seed)
 
     def _getvalidneighbours(self, pos):
         """Returns all valid neighbours of a position."""
