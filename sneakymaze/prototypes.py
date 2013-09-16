@@ -65,10 +65,41 @@ class Maze2DPrototype(object):
         if self._isinside(cell):
             yield cell
 
+    def _getneighbours_withorig(self, pos):
+        """
+        Returns all neighbours of a position with the original cell.
+        That means, that one neighbour item will look like this:
+        (neighbourx, neighboury, originalx, originaly)
+        """
+        cell = (pos[0], pos[1] + 2, pos[0], pos[1])
+        if self._isinside(cell):
+            yield cell
+        cell = (pos[0], pos[1] - 2, pos[0], pos[1])
+        if self._isinside(cell):
+            yield cell
+        cell = (pos[0] + 2, pos[1], pos[0], pos[1])
+        if self._isinside(cell):
+            yield cell
+        cell = (pos[0] - 2, pos[1], pos[0], pos[1])
+        if self._isinside(cell):
+            yield cell
+
     def _getwallneighbours(self, pos):
         """Returns only the neighbours which are a wall (have value 'False')."""
         mylist = []
         neighbours = self._getneighbours(pos)
+        for neighbour in neighbours:
+            if not self.content[neighbour[0]][neighbour[1]]:
+                mylist.append(neighbour)
+        return mylist
+
+    def _getwallneighbours_withorig(self, pos):
+        """
+        Returns only the neighbours wich are a wall (have value 'False').
+        Contains the original cell at index 2 and 3.
+        """
+        mylist = []
+        neighbours = self._getneighbours_withorig(pos)
         for neighbour in neighbours:
             if not self.content[neighbour[0]][neighbour[1]]:
                 mylist.append(neighbour)

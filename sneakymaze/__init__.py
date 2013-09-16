@@ -12,3 +12,4 @@ __license__ = "MIT"
 __version__ = "1.0"
 
 from sneakymaze.simple2d import Simple2D
+from sneakymaze.prim2d import Prim2D

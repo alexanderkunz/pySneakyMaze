@@ -16,6 +16,12 @@ class Simple2D(Maze2DPrototype):
     def _computecell(self, lastcell, cell, rand):
         """Main part of the generation algorithm."""
 
+        #Here you can put some stuff like
+        #print(self)
+        #to visualize each step of the algorithm.
+        #Attention with running the example then, it includes the benchmarks
+        #with many generations, so you would just spam your terminal.
+
         #Update Array
         self.content[(cell[0] + lastcell[0]) / 2] \
                     [(cell[1] + lastcell[1]) / 2] = True
