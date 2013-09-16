@@ -13,15 +13,6 @@ class Simple2D(Maze2DPrototype):
     shouldn't go much over 100x100 or else it could fail.
     """
 
-    def _getvalidneighbours(self, pos):
-        """Returns all valid neighbours of a position."""
-        mylist = []
-        neighbours = self._getneighbours(pos)
-        for neighbour in neighbours:
-            if not self.content[neighbour[0]][neighbour[1]]:
-                mylist.append(neighbour)
-        return mylist
-
     def _computecell(self, lastcell, cell, rand):
         """Main part of the generation algorithm."""
 
@@ -30,7 +21,7 @@ class Simple2D(Maze2DPrototype):
                     [(cell[1] + lastcell[1]) / 2] = True
 
         #Get new Neighbours
-        neighbours = self._getvalidneighbours(cell)
+        neighbours = self._getwallneighbours(cell)
         if len(neighbours) <= 0:
             return
 

@@ -67,6 +67,15 @@ class Maze2DPrototype(object):
             neighbours.append(cell)
         return neighbours
 
+    def _getwallneighbours(self, pos):
+        """Returns only the neighbours which are a wall (have value 'False')."""
+        mylist = []
+        neighbours = self._getneighbours(pos)
+        for neighbour in neighbours:
+            if not self.content[neighbour[0]][neighbour[1]]:
+                mylist.append(neighbour)
+        return mylist
+
     def clear(self):
         """Sets all cells of the array to false."""
         self.content = [[False for _ in range(self.size[1])]
