@@ -20,36 +20,37 @@ def visual():
     print("Prim2D (79x19)")
     print(repr(sneakymaze.Prim2D((79, 19))) + "\n")
 
+    #AldBro2D
+    print("AldBro2D (79x19)")
+    print(repr(sneakymaze.AldBro2D((79, 19))) + "\n")
+
+def benchmark_func(samples, func, *args):
+    srange = range(samples)
+    time1 = time.time()
+    for _ in srange:
+        func(*args)
+    time2 = time.time()
+    return (time2 - time1) / samples
+
 def benchmark():
     """Outputs a few benchmarks."""
 
     #How much loops
-    b_samples = 100
-    b_range = range(b_samples)
+    samples = 100
+
+    print("Average Benchmarking Results ({s} samples):".format(s=samples))
 
     #Simple2D
-    time1 = time.time()
-    for _ in b_range:
-        sneakymaze.Simple2D((79, 9))
-    time2 = time.time()
-    b_s2d_t = (time2 - time1) / b_samples
+    s2d_t = benchmark_func(samples, sneakymaze.Simple2D, (79, 9))
+    print("Simple2D (79x9): {t}s".format(t=round(s2d_t, 6)))
 
     #Prim2D
-    time1 = time.time()
-    for _ in b_range:
-        sneakymaze.Prim2D((79, 9))
-    time2 = time.time()
-    b_p2d_t = (time2 - time1) / b_samples
+    p2d_t = benchmark_func(samples, sneakymaze.Prim2D, (79, 9))
+    print("Simple2D (79x9): {t}s".format(t=round(p2d_t, 6)))
 
-    #Results
-    print("""
-Average Benchmarking Results ({s} samples):
-Simple2D (79x9): {s2d} seconds
-Prim2D   (79x9): {p2d} seconds
-""".format(s=b_samples,
-           s2d=round(b_s2d_t, 6),
-           p2d=round(b_p2d_t, 6)
-          ))
+    #AldBro2D
+    ab2d_t = benchmark_func(samples, sneakymaze.AldBro2D, (79, 9))
+    print("Simple2D (79x9): {t}s".format(t=round(ab2d_t, 6)))
 
 
 if __name__ == "__main__":

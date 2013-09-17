@@ -8,7 +8,7 @@ from sneakymaze.prototypes import Maze2DPrototype
 
 class Prim2D(Maze2DPrototype):
     """
-    A randomized 2D-Prim's-Algorithm implementation. Since this one is not
+    A randomized 2D-Prim's-Algorithm implementation. Because this one is not
     using recursion, it should be able to compute much bigger mazes
     than Simple2D.
     """
