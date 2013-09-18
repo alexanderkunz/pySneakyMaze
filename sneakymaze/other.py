@@ -5,7 +5,7 @@ nice mazes. You still can use them if you find them useful, though.
 """
 
 import random
-from prototypes import Maze2DPrototype
+from sneakymaze.prototypes import Maze2DPrototype
 
 class AldBro2D(Maze2DPrototype):
     """
@@ -65,5 +65,51 @@ class AldBro2D(Maze2DPrototype):
                 else:
                     if curpos[1] - 2 > 0:
                         curpos[1] -= 2
+
+        return True
+
+class BinTree2D(Maze2DPrototype):
+    """
+    Binary-Tree Algorithm. Very fast, but not very nice output.
+    """
+
+    def regenerate(self, seed=None, start=None):
+        """
+        Generates a new maze. Be careful, this is already done in the
+        constructor, so only call this if you want a second maze.
+        Currently ignores the start, default direction is northwest.
+        """
+
+        #Clear
+        self.clear()
+
+        #Variables
+        rand = random.Random(seed)
+
+        #For every cell from left upper corner
+        for curx in range(1, self.size[0], 2):
+            for cury in range(1, self.size[1], 2):
+
+                #Set to floor
+                self.content[curx][cury] = True
+
+                #Random passage selection
+                north = rand.randint(0, 1)
+                west = not north
+
+                #To produce closed maze
+                if curx == 1:
+                    north = True
+                    west = False
+                if cury == 1:
+                    north = False
+                    west = True
+
+                #Make passages if not upper left corner
+                if not (curx == 1 and cury == 1):
+                    if north:
+                        self.content[curx][cury - 1] = True
+                    if west:
+                        self.content[curx - 1][cury] = True
 
         return True

@@ -24,7 +24,12 @@ def visual():
     print("AldBro2D (79x19)")
     print(repr(sneakymaze.AldBro2D((79, 19))) + "\n")
 
+    #BinTree2D
+    print("BinTree2D (79x19)")
+    print(repr(sneakymaze.BinTree2D((79, 19))) + "\n")
+
 def benchmark_func(samples, func, *args):
+    """Returns average time in seconds needed to run a function."""
     srange = range(samples)
     time1 = time.time()
     for _ in srange:
@@ -51,6 +56,10 @@ def benchmark():
     #AldBro2D
     ab2d_t = benchmark_func(samples, sneakymaze.AldBro2D, (79, 9))
     print("AlBro2D (79x9): {t}s".format(t=round(ab2d_t, 6)))
+
+    #BinTree2D
+    bt2d_t = benchmark_func(samples, sneakymaze.BinTree2D, (79, 9))
+    print("BinTree2D (79x9): {t}s".format(t=round(bt2d_t, 6)))
 
 
 if __name__ == "__main__":
