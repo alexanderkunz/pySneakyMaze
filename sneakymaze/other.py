@@ -44,8 +44,8 @@ class AldBro2D(Maze2DPrototype):
 
                 #Make cell and passage floor
                 self.content[curpos[0]][curpos[1]] = True
-                self.content[(curpos[0] + lastpos[0]) / 2] \
-                            [(curpos[1] + lastpos[1]) / 2] = True
+                self.content[(curpos[0] + lastpos[0]) // 2] \
+                            [(curpos[1] + lastpos[1]) // 2] = True
 
             #Random Move
             lastpos = curpos[:]

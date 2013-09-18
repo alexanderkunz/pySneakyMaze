@@ -23,8 +23,8 @@ class Simple2D(Maze2DPrototype):
         #with many generations, so you would just spam your terminal.
 
         #Update Array
-        self.content[(cell[0] + lastcell[0]) / 2] \
-                    [(cell[1] + lastcell[1]) / 2] = True
+        self.content[(cell[0] + lastcell[0]) // 2] \
+                    [(cell[1] + lastcell[1]) // 2] = True
 
         #Get new Neighbours
         neighbours = self._getwallneighbours(cell)

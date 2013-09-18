@@ -52,8 +52,8 @@ class Prim2D(Maze2DPrototype):
 
                 #Make cell and passage floor with use of original cell
                 self.content[cell[0]][cell[1]] = True
-                self.content[(cell[0] + cell[2]) / 2] \
-                            [(cell[1] + cell[3]) / 2] = True
+                self.content[(cell[0] + cell[2]) // 2] \
+                            [(cell[1] + cell[3]) // 2] = True
 
                 #Add neighbours
                 active += self._getwallneighbours_withorig(cell)
