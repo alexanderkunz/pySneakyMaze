@@ -46,11 +46,11 @@ def benchmark():
 
     #Prim2D
     p2d_t = benchmark_func(samples, sneakymaze.Prim2D, (79, 9))
-    print("Simple2D (79x9): {t}s".format(t=round(p2d_t, 6)))
+    print("Prim2D (79x9): {t}s".format(t=round(p2d_t, 6)))
 
     #AldBro2D
     ab2d_t = benchmark_func(samples, sneakymaze.AldBro2D, (79, 9))
-    print("Simple2D (79x9): {t}s".format(t=round(ab2d_t, 6)))
+    print("AlBro2D (79x9): {t}s".format(t=round(ab2d_t, 6)))
 
 
 if __name__ == "__main__":
