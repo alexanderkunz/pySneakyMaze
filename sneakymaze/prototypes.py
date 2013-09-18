@@ -46,8 +46,8 @@ class Maze2DPrototype(object):
 
     def _isinside(self, pos):
         """Checks if a position is inside the array."""
-        xinside = pos[0] > 0 and pos[0] < self.size[0]
-        yinside = pos[1] > 0 and pos[1] < self.size[1]
+        xinside = pos[0] >= 0 and pos[0] < self.size[0]
+        yinside = pos[1] >= 0 and pos[1] < self.size[1]
         return xinside and yinside
 
     def _getneighbours(self, pos):
