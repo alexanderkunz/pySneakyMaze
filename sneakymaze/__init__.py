@@ -13,4 +13,5 @@ __version__ = "1.0"
 
 from sneakymaze.simple import Simple2D
 from sneakymaze.prim import Prim2D
+from sneakymaze.sidewinder import Sidewinder2D
 from sneakymaze.other import AldBro2D, BinTree2D

@@ -90,26 +90,32 @@ class BinTree2D(Maze2DPrototype):
         for curx in range(1, self.size[0], 2):
             for cury in range(1, self.size[1], 2):
 
-                #Set to floor
+                #Variables
+                west = False
+                north = False
+
+                #First row has to be floor
+                if cury == 1:
+                    west = curx > 1
+
+                #On second row and further
+                else:
+                    if curx > 1 and rand.randint(0, 1):
+                        west = True
+                        north = False
+                    else:
+                        west = False
+                        north = True
+
+                #Set cell to floor
                 self.content[curx][cury] = True
 
-                #Random passage selection
-                north = rand.randint(0, 1)
-                west = not north
+                #West
+                if west:
+                    self.content[curx - 1][cury] = True
 
-                #To produce closed maze
-                if curx == 1:
-                    north = True
-                    west = False
-                if cury == 1:
-                    north = False
-                    west = True
-
-                #Make passages if not upper left corner
-                if not (curx == 1 and cury == 1):
-                    if north:
-                        self.content[curx][cury - 1] = True
-                    if west:
-                        self.content[curx - 1][cury] = True
+                #North
+                if north:
+                    self.content[curx][cury - 1] = True
 
         return True

@@ -20,6 +20,10 @@ def visual():
     print("Prim2D (79x19)")
     print(repr(sneakymaze.Prim2D((79, 19))) + "\n")
 
+    #Sidewinder2D
+    print("Sidewinder2D (79x19)")
+    print(repr(sneakymaze.Sidewinder2D((79, 19))) + "\n")
+
     #AldBro2D
     print("AldBro2D (79x19)")
     print(repr(sneakymaze.AldBro2D((79, 19))) + "\n")
@@ -52,6 +56,10 @@ def benchmark():
     #Prim2D
     p2d_t = benchmark_func(samples, sneakymaze.Prim2D, (79, 9))
     print("Prim2D (79x9): {t}s".format(t=round(p2d_t, 6)))
+
+    #Sidewinder2D
+    sw2d_t = benchmark_func(samples, sneakymaze.Sidewinder2D, (79, 9))
+    print("Sidewinder2D (79x9): {t}s".format(t=round(sw2d_t, 6)))
 
     #AldBro2D
     ab2d_t = benchmark_func(samples, sneakymaze.AldBro2D, (79, 9))
