@@ -120,6 +120,14 @@ class Maze2DPrototype(object):
 			return_str += "\n"
 		return return_str
 
+	def is_floor(self, x, y):
+		"""Returns True if a specific tile is a floor."""
+		return self.content[x][y]
+
+	def is_wall(self, x, y):
+		"""Returns True if a specific tile is a wall."""
+		return not self.content[x][y]
+
 	def regenerate(self, seed=None, start=None):
 		"""Override! Should create a new maze."""
 		pass
