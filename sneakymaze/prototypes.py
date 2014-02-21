@@ -1,9 +1,10 @@
 """
-This file contains the prototypes needed for the implementations of the algorithms.
+This file contains the basic maze prototypes.
 They contain a few useful tools for the child classes.
 """
 
 import math
+
 from sneakymaze.exceptions import InvalidSizeException, EvenException
 
 

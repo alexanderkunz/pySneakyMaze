@@ -1,9 +1,11 @@
 """
 Prim2D - Randomized Version of the Prim-Algorithm
 High Quality - Average Speed
-Because the algorithm works without using recursion, it should be able to compute much bigger mazes
-than those ones who do (for example Simple2D).
-This algorithm should probably be your best choice if you want to generate high quality mazes of any size.
+
+Because the algorithm works without using recursion, it should be able to
+compute much bigger mazes than those ones who do (for example Simple2D).
+This algorithm should probably be your best choice if you want to generate high
+quality mazes for generic usage of any size.
 """
 
 import random
@@ -38,11 +40,9 @@ class Prim2D(Maze2DPrototype):
 
 		while len(active):
 
-			#Here you can put some stuff like
+			#For toying around, but warning:
+			#If you uncomment this, it will accidentally your whole terminal!
 			#print(self)
-			#to visualize each step of the algorithm.
-			#Attention with running the example then, it includes the benchmarks
-			#with many generations, so you would just spam your terminal.
 
 			#Get random item and remove it from list
 			index = rand.randint(0, len(active) - 1)
@@ -51,7 +51,6 @@ class Prim2D(Maze2DPrototype):
 
 			#Ignore if already floor
 			if not self.content[cell[0]][cell[1]]:
-
 				#Make cell and passage floor with use of original cell
 				passage_x = (cell[0] + cell[2]) // 2
 				passage_y = (cell[1] + cell[3]) // 2

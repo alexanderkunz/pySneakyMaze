@@ -1,4 +1,4 @@
-pySneakyMaze
+                                 pySneakyMaze
 
 A python library for generating two dimensional mazes. Mazes are saved in
 boolean arrays to mark wall (False) or floor (True). Several algorithms

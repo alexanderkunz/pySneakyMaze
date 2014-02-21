@@ -1,8 +1,10 @@
 """
 Simple2D - Depth-First-Algorithm
-Currently the algorithm is
-heavily using recursion. With the default python recursion limit it
-shouldn't go much over 100x100 or else it could fail.
+High Quality, Average Speed
+
+Currently the algorithm is heavily using recursion. With the default python
+recursion limit at the time of writing it shouldn't go much over 100x100 or else
+it could fail.
 """
 
 import random

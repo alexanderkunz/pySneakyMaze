@@ -1,11 +1,14 @@
 """
 Aldous-Broder-Algorithm
 Good Quality - Very Slow
-Imagine a drunken guy running in random directions through the maze. The generator has finished when he was everywhere.
-Because of this you shouldn't even think about big mazes if you want to be still alive when it finally finishes.
+
+Imagine a drunken guy running in random directions through the maze. The
+generator finishes when he was everywhere. Because of this you shouldn't even
+think about big mazes if you want to be still alive when it finally finishes.
 """
 
 import random
+
 from sneakymaze.prototypes import Maze2DPrototype
 
 
@@ -38,7 +41,6 @@ class AldBro2D(Maze2DPrototype):
 
 			#If not yet floor
 			if not self.content[pos_cur[0]][pos_cur[1]]:
-
 				#Increase Visited
 				visited += 1
 

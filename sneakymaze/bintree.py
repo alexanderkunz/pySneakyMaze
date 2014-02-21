@@ -4,6 +4,7 @@ Very Poor Quality - Very Fast
 """
 
 import random
+
 from sneakymaze.prototypes import Maze2DPrototype
 
 

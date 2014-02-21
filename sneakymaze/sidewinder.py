@@ -1,10 +1,12 @@
 """
 Sidewinder
 Poor Quality - Very Fast
-A bit slower than the BinTree algorithm, but it creates mazes with higher quality.
 
-While it already works, its not finished, because it doesn't have the same behavior as the
-standard sidewinder algorithm. I'll fix it when I get the time and motivation for it.
+A bit slower than the BinTree algorithm, but creates mazes with higher quality.
+
+While it already works, its not finished, because it doesn't have the same
+behavior as the standard sidewinder algorithm. I'll fix it when I get the time
+and motivation for it.
 """
 
 import random
