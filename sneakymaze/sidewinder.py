@@ -1,5 +1,10 @@
 """
 Sidewinder
+Poor Quality - Very Fast
+A bit slower than the BinTree algorithm, but it creates mazes with higher quality.
+
+While it already works, its not finished, because it doesn't have the same behavior as the
+standard sidewinder algorithm. I'll fix it when I get the time and motivation for it.
 """
 
 import random
@@ -14,8 +19,7 @@ class Sidewinder2D(Maze2DPrototype):
 
 	def regenerate(self, seed=None, start=None):
 		"""
-		Generates a new maze. Be careful, this is already done in the
-		constructor, so only call this if you want a second maze.
+		Generates a new maze.
 		"""
 
 		#Clear

@@ -1,6 +1,6 @@
 """
-This file contains the prototypes needed for the implementations
-of the algorithms.
+This file contains the prototypes needed for the implementations of the algorithms.
+They contain a few useful tools for the child classes.
 """
 
 import math
@@ -9,7 +9,7 @@ from sneakymaze.exceptions import InvalidSizeException, EvenException
 
 class Maze2DPrototype(object):
 	"""
-	Prototype for 2D mazes with standard functions.
+	The 2D maze prototype.
 	"""
 
 	def __init__(self, size, seed=None):

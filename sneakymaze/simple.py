@@ -1,5 +1,8 @@
 """
 Simple2D - Depth-First-Algorithm
+Currently the algorithm is
+heavily using recursion. With the default python recursion limit it
+shouldn't go much over 100x100 or else it could fail.
 """
 
 import random
@@ -9,9 +12,7 @@ from sneakymaze.prototypes import Maze2DPrototype
 
 class Simple2D(Maze2DPrototype):
 	"""
-	A 2D-Depth-First-Algorithm implementation. Currently the algorithm is
-	heavily using recursion. With the default python recursion limit it
-	shouldn't go much over 100x100 or else it could fail.
+	A 2D-Depth-First-Algorithm implementation.
 	"""
 
 	def _compute_cell(self, cell_last, cell, rand):

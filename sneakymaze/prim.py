@@ -1,5 +1,9 @@
 """
 Prim2D - Randomized Version of the Prim-Algorithm
+High Quality - Average Speed
+Because the algorithm works without using recursion, it should be able to compute much bigger mazes
+than those ones who do (for example Simple2D).
+This algorithm should probably be your best choice if you want to generate high quality mazes of any size.
 """
 
 import random
@@ -9,15 +13,12 @@ from sneakymaze.prototypes import Maze2DPrototype
 
 class Prim2D(Maze2DPrototype):
 	"""
-	A randomized 2D-Prim-Algorithm implementation. Because this one is not
-	using recursion, it should be able to compute much bigger mazes
-	than Simple2D.
+	The 2D implementation.
 	"""
 
 	def regenerate(self, seed=None, start=None):
 		"""
-		Generates a new maze. Be careful, this is already done in the
-		constructor, so only call this if you want a second maze.
+		Generates a new maze.
 		"""
 
 		#Clear
