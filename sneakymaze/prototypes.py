@@ -122,10 +122,14 @@ class Maze2DPrototype(object):
 
 	def is_floor(self, x, y):
 		"""Returns True if a specific tile is a floor."""
+		if (x < 0) or (y < 0) or (x > self.size[0]) or (y > self.size[1]):
+			return False
 		return self.content[x][y]
 
 	def is_wall(self, x, y):
 		"""Returns True if a specific tile is a wall."""
+		if (x < 0) or (y < 0) or (x > self.size[0]) or (y > self.size[1]):
+			return True
 		return not self.content[x][y]
 
 	def regenerate(self, seed=None, start=None):
