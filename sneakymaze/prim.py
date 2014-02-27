@@ -14,50 +14,50 @@ from sneakymaze.prototypes import Maze2DPrototype
 
 
 class Prim2D(Maze2DPrototype):
-	"""
-	The 2D implementation.
-	"""
+    """
+    The 2D implementation.
+    """
 
-	def regenerate(self, seed=None, start=None):
-		"""
-		Generates a new maze.
-		"""
+    def regenerate(self, seed=None, start=None):
+        """
+        Generates a new maze.
+        """
 
-		#Clear
-		self.clear()
+        #Clear
+        self.clear()
 
-		#Check Start
-		if start:
-			self.start = start
+        #Check Start
+        if start:
+            self.start = start
 
-		#Repeat start for original cell
-		if len(self.start) == 2:
-			self.start += self.start
+        #Repeat start for original cell
+        if len(self.start) == 2:
+            self.start += self.start
 
-		#Variables
-		rand = random.Random(seed)
-		active = [self.start]
+        #Variables
+        rand = random.Random(seed)
+        active = [self.start]
 
-		while len(active):
+        while len(active):
 
-			#For toying around, but warning:
-			#If you uncomment this, it will accidentally your whole terminal!
-			#print(self)
+            #For toying around, but warning:
+            #If you uncomment this, it will accidentally your whole terminal!
+            #print(self)
 
-			#Get random item and remove it from list
-			index = rand.randint(0, len(active) - 1)
-			cell = active[index]
-			active.pop(index)
+            #Get random item and remove it from list
+            index = rand.randint(0, len(active) - 1)
+            cell = active[index]
+            active.pop(index)
 
-			#Ignore if already floor
-			if not self.content[cell[0]][cell[1]]:
-				#Make cell and passage floor with use of original cell
-				passage_x = (cell[0] + cell[2]) // 2
-				passage_y = (cell[1] + cell[3]) // 2
-				self.content[cell[0]][cell[1]] = True
-				self.content[passage_x][passage_y] = True
+            #Ignore if already floor
+            if not self.content[cell[0]][cell[1]]:
+                #Make cell and passage floor with use of original cell
+                passage_x = (cell[0] + cell[2]) // 2
+                passage_y = (cell[1] + cell[3]) // 2
+                self.content[cell[0]][cell[1]] = True
+                self.content[passage_x][passage_y] = True
 
-				#Add neighbours
-				active += self._neighbours_wall_original(cell)
+                #Add neighbours
+                active += self._neighbours_wall_original(cell)
 
-		return True
+        return True
